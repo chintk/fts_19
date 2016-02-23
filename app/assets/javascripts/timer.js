@@ -1,6 +1,6 @@
 var $countdown;
 incrementTime = 70;
-currentTime = 20*6000;
+currentTime = 45*6000;
  
 function updateTimer(){
   $countdown.html(formatTime(currentTime));

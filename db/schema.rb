@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150327020710) do
+ActiveRecord::Schema.define(version: 20150330013303) do
 
   create_table "answers", force: :cascade do |t|
     t.string   "content"
@@ -23,8 +23,36 @@ ActiveRecord::Schema.define(version: 20150327020710) do
 
   add_index "answers", ["question_id"], name: "index_answers_on_question_id"
 
+  create_table "approvals", force: :cascade do |t|
+    t.integer  "exam_id"
+    t.integer  "question_id"
+    t.boolean  "correct"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "approvals", ["exam_id"], name: "index_approvals_on_exam_id"
+  add_index "approvals", ["question_id"], name: "index_approvals_on_question_id"
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+
   create_table "exams", force: :cascade do |t|
     t.integer  "mark"
+    t.integer  "status"
     t.datetime "time"
     t.integer  "user_id"
     t.integer  "subject_id"

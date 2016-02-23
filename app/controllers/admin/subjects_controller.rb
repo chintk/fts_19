@@ -17,7 +17,7 @@ class Admin::SubjectsController < BaseController
     @subject = Subject.new subject_params
     if @subject.save
       flash[:success] = "Created new subject"
-      redirect_to admin_subjects_url
+      return redirect_to admin_subjects_url
     end
     render 'new'
   end
@@ -26,7 +26,7 @@ class Admin::SubjectsController < BaseController
     @subject = Subject.find params[:id]
     if @subject.update_attributes subject_params
       flash[:success] = "Information changed"     
-      redirect_to admin_subjects_url and return
+      return redirect_to admin_subjects_url
     end
     render 'show'
   end

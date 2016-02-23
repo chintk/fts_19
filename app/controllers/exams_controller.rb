@@ -18,9 +18,10 @@ class ExamsController < BaseController
     @exam = Exam.new exam_params
     if @exam.save      
       flash[:success] = "Created new examination"
-      redirect_to root_url and return
+      return redirect_to root_url
     end    
     flash[:danger] = "Error"
+    render "new"
   end
 
   def edit
